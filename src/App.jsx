@@ -1,18 +1,19 @@
 import "./App.css";
 
 function App() {
-  const cows = [
-    { name: "Nick", socialSecurityNumber: 0 },
-    { name: "Kevin", socialSecurityNumber: 1 },
-    { name: "Hannah", socialSecurityNumber: 2 },
+  const frogs = [
+    { type: "Tree Frog", id: 0 },
+    { type: "Toad", id: 1 },
+    { type: "Bullfrog", id: 2 },
+    { type: "Poison Dart Frog", id: 3 },
   ];
 
   return (
     <>
-      <h1>Cows</h1>
+      <h1>Frogs</h1>
       <ul>
-        {cows.map((cow) => (
-          <li key={cow.socialSecurityNumber}>{cow.name}</li>
+        {frogs.map((cow) => (
+          <li key={cow.id}>{cow.type}</li>
         ))}
       </ul>
     </>

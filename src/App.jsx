@@ -1,13 +1,13 @@
 import "./App.css";
-import FrogsList from "./FrogsList.jsx";
-import AddFrogForm from "./AddFrogForm.jsx";
+import GoosesList from "./GooseList.jsx";
+import AddGooseForm from "./AddGooseForm.jsx";
 
 function App() {
   return (
     <>
-      <h1>Frogs</h1>
-      <AddFrogForm />
-      <FrogsList />
+      <h1>Geese</h1>
+      <AddGooseForm />
+      <GoosesList />
     </>
   );
 }

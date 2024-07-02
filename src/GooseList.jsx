@@ -1,7 +1,7 @@
 // This is a component
 import GooseListItem from "./GooseListItem.jsx";
 
-const gooses = [
+const geese = [
   { type: "Tree Goose", id: 0 },
   { type: "Toad", id: 1 },
   { type: "Bullgoose", id: 2 },
@@ -11,7 +11,7 @@ const gooses = [
 export default function GoosesList() {
   return (
     <ul>
-      {gooses.map((goose) => (
+      {geese.map((goose) => (
         <GooseListItem key={goose.id} type={goose.type} />
       ))}
     </ul>

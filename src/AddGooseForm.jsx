@@ -1,10 +1,12 @@
-export default function AddGooseForm() {
+export default function AddGooseForm(props) {
   function handleAddGoose(event) {
     event.preventDefault();
     const form = event.target;
     const input = form.querySelector("input");
     const inputValue = input.value;
     console.log(inputValue);
+    props.onAddGoose(inputValue);
+    form.reset();
   }
 
   return (

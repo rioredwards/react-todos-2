@@ -1,4 +1,5 @@
 // This is a component
+import FrogListItem from "./FrogListItem.jsx";
 
 const frogs = [
   { type: "Tree Frog", id: 0 },
@@ -11,7 +12,7 @@ export default function FrogsList() {
   return (
     <ul>
       {frogs.map((frog) => (
-        <li key={frog.id}>{frog.type}</li>
+        <FrogListItem key={frog.id} type={frog.type} />
       ))}
     </ul>
   );

@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     "react/jsx-no-target-blank": "off",
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+    "react/prop-types": [0], // <-- Add this to stop eslint from complaining about prop types
   },
 };

@@ -1,3 +1,3 @@
 export default function GooseListItem(props) {
-  return <li>{props.type}</li>;
+  return <li>{props.title}</li>;
 }

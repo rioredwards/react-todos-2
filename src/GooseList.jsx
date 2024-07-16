@@ -2,17 +2,17 @@
 import GooseListItem from "./GooseListItem.jsx";
 
 const geese = [
-  { type: "Tree Goose", id: 0 },
-  { type: "Toad", id: 1 },
-  { type: "Bullgoose", id: 2 },
-  { type: "Poison Dart Goose", id: 3 },
+  { title: "Lucy", id: 0 },
+  { title: "Toad", id: 1 },
+  { title: "Gander", id: 2 },
+  { title: "Honker", id: 3 },
 ];
 
 export default function GoosesList() {
   return (
     <ul>
       {geese.map((goose) => (
-        <GooseListItem key={goose.id} type={goose.type} />
+        <GooseListItem key={goose.id} title={goose.title} />
       ))}
     </ul>
   );

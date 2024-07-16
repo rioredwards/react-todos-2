@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddGooseForm(props) {
+export default function AddGooseForm({ onAddGoose }) {
   const [gooseTitle, setGooseTitle] = useState("");
 
   function handleTitleChange(event) {
@@ -11,8 +11,13 @@ export default function AddGooseForm(props) {
   function handleAddGoose(event) {
     event.preventDefault();
     const form = event.target;
-    props.onAddGoose(gooseTitle);
-    form.reset();
+    const newGoose = {
+      title: gooseTitle,
+      id: Date.now(),
+    };
+
+    onAddGoose(newGoose);
+    setGooseTitle("");
   }
 
   return (

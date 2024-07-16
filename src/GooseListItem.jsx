@@ -1,3 +1,3 @@
-export default function GooseListItem(props) {
-  return <li>{props.title}</li>;
+export default function GooseListItem({ title }) {
+  return <li>{title}</li>;
 }

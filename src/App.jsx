@@ -5,13 +5,14 @@ import AddGooseForm from "./AddGooseForm.jsx";
 
 function App() {
   const [newGoose, setNewGoose] = useState("");
+  const [gooseList, setGooseList] = useState([]);
 
   return (
     <>
       <h1>Geese</h1>
       <AddGooseForm onAddGoose={setNewGoose} />
       <p>{newGoose}</p>
-      <GoosesList />
+      <GoosesList gooseList={gooseList} />
     </>
   );
 }

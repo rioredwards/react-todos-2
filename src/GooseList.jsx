@@ -1,17 +1,10 @@
 // This is a component
 import GooseListItem from "./GooseListItem.jsx";
 
-const geese = [
-  { title: "Lucy", id: 0 },
-  { title: "Toad", id: 1 },
-  { title: "Gander", id: 2 },
-  { title: "Honker", id: 3 },
-];
-
-export default function GoosesList() {
+export default function GoosesList(props) {
   return (
     <ul>
-      {geese.map((goose) => (
+      {props.gooseList.map((goose) => (
         <GooseListItem key={goose.id} title={goose.title} />
       ))}
     </ul>

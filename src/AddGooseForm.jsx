@@ -10,7 +10,6 @@ export default function AddGooseForm({ onAddGoose }) {
 
   function handleAddGoose(event) {
     event.preventDefault();
-    const form = event.target;
     const newGoose = {
       title: gooseTitle,
       id: Date.now(),

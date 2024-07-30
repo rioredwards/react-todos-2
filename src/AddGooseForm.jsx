@@ -22,11 +22,10 @@ export default function AddGooseForm({ onAddGoose }) {
 
   return (
     <form onSubmit={handleAddGoose}>
-      <InputWithLabel
-        gooseTitle={gooseTitle}
-        handleTitleChange={handleTitleChange}
-        label="Add a goose!"
-      />
+      <InputWithLabel gooseTitle={gooseTitle} handleTitleChange={handleTitleChange}>
+        Add a goose!
+      </InputWithLabel>
+
       <button type="submit">Add Goose</button>
     </form>
   );

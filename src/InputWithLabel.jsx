@@ -1,7 +1,7 @@
 export function InputWithLabel(props) {
   return (
     <>
-      <label htmlFor="gooseType">{props.label}</label>
+      <label htmlFor="gooseType">{props.children}</label>
       <input
         value={props.gooseTitle}
         onChange={props.handleTitleChange}

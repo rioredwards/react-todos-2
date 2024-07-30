@@ -22,11 +22,16 @@ function App() {
     setGooseList((previousGooseList) => [...previousGooseList, newGoose]);
   }
 
+  function removeTodo(id) {
+    const filteredGeese = gooseList.filter((goose) => goose.id !== id);
+    setGooseList(filteredGeese);
+  }
+
   return (
     <>
       <h1>Geese</h1>
       <AddGooseForm onAddGoose={addGoose} />
-      <GoosesList gooseList={gooseList} />
+      <GoosesList onRemoveGoose={removeTodo} gooseList={gooseList} />
     </>
   );
 }

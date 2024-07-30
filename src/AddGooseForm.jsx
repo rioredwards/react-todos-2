@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { InputWithLabel } from "./InputWithLabel.jsx";
 
 export default function AddGooseForm({ onAddGoose }) {
   const [gooseTitle, setGooseTitle] = useState("");
@@ -21,8 +22,11 @@ export default function AddGooseForm({ onAddGoose }) {
 
   return (
     <form onSubmit={handleAddGoose}>
-      <label htmlFor="gooseType">Enter goose name</label>
-      <input value={gooseTitle} onChange={handleTitleChange} name="type" id="gooseType" />
+      <InputWithLabel
+        gooseTitle={gooseTitle}
+        handleTitleChange={handleTitleChange}
+        label="Add a goose!"
+      />
       <button type="submit">Add Goose</button>
     </form>
   );

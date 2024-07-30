@@ -21,7 +21,7 @@ export default function AddGooseForm({ onAddGoose }) {
 
   return (
     <form onSubmit={handleAddGoose}>
-      <label htmlFor="gooseType">Enter goose type</label>
+      <label htmlFor="gooseType">Enter goose name</label>
       <input value={gooseTitle} onChange={handleTitleChange} name="type" id="gooseType" />
       <button type="submit">Add Goose</button>
     </form>

@@ -1,38 +1,38 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import GoosesList from "./GooseList.jsx";
-import AddGooseForm from "./AddGooseForm.jsx";
+import MeeseList from "./MooseList.jsx";
+import AddMooseForm from "./AddMooseForm.jsx";
 
 function useSemiPersistentState() {
-  const existingGeese = JSON.parse(localStorage.getItem("savedGooseList")) ?? [];
-  const [gooseList, setGooseList] = useState(existingGeese);
+  const existingMeese = JSON.parse(localStorage.getItem("savedMooseList")) ?? [];
+  const [mooseList, setMooseList] = useState(existingMeese);
 
   useEffect(() => {
-    const gooseListString = JSON.stringify(gooseList);
-    localStorage.setItem("savedGooseList", gooseListString);
-  }, [gooseList]);
+    const mooseListString = JSON.stringify(mooseList);
+    localStorage.setItem("savedMooseList", mooseListString);
+  }, [mooseList]);
 
-  return [gooseList, setGooseList];
+  return [mooseList, setMooseList];
 }
 
 function App() {
-  const [gooseList, setGooseList] = useSemiPersistentState();
+  const [mooseList, setMooseList] = useSemiPersistentState();
 
-  function addGoose(newGoose) {
-    setGooseList((previousGooseList) => [...previousGooseList, newGoose]);
+  function addMoose(newMoose) {
+    setMooseList((previousMooseList) => [...previousMooseList, newMoose]);
   }
 
   function removeTodo(id) {
-    const filteredGeese = gooseList.filter((goose) => goose.id !== id);
-    setGooseList(filteredGeese);
+    const filteredMeese = mooseList.filter((moose) => moose.id !== id);
+    setMooseList(filteredMeese);
   }
 
   return (
-    <>
-      <h1>Geese</h1>
-      <AddGooseForm onAddGoose={addGoose} />
-      <GoosesList onRemoveGoose={removeTodo} gooseList={gooseList} />
-    </>
+    <main>
+      <h1>Meese</h1>
+      <AddMooseForm onAddMoose={addMoose} />
+      <MeeseList onRemoveMoose={removeTodo} mooseList={mooseList} />
+    </main>
   );
 }
 

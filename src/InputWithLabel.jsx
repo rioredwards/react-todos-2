@@ -13,12 +13,12 @@ export function InputWithLabel(props) {
 
   return (
     <>
-      <label htmlFor="gooseType">{props.children}</label>
+      <label htmlFor="mooseType">{props.children}</label>
       <input
-        value={props.gooseTitle}
+        value={props.mooseTitle}
         onChange={props.handleTitleChange}
         name="type"
-        id="gooseType"
+        id="mooseType"
         ref={inputRef}
       />
     </>

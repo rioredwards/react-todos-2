@@ -3,20 +3,34 @@ import { useEffect, useState } from "react";
 import MeeseList from "./MooseList.jsx";
 import AddMooseForm from "./AddMooseForm.jsx";
 
-function useSemiPersistentState() {
-  const existingMeese = JSON.parse(localStorage.getItem("savedMooseList")) ?? [];
-  const [mooseList, setMooseList] = useState(existingMeese);
+function App() {
+  const [mooseList, setMooseList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const mooseListString = JSON.stringify(mooseList);
-    localStorage.setItem("savedMooseList", mooseListString);
-  }, [mooseList]);
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const existingMeese = JSON.parse(localStorage.getItem("savedMooseList")) ?? [];
+        const object = {
+          data: {
+            mooseList: existingMeese,
+          },
+        };
+        resolve(object);
+      }, 2000);
+    }).then((result) => {
+      const retrievedMooseList = result.data.mooseList;
+      setMooseList(retrievedMooseList);
+      setIsLoading(false);
+    });
+  }, []);
 
-  return [mooseList, setMooseList];
-}
-
-function App() {
-  const [mooseList, setMooseList] = useSemiPersistentState();
+  useEffect(() => {
+    if (!isLoading) {
+      const mooseListString = JSON.stringify(mooseList);
+      localStorage.setItem("savedMooseList", mooseListString);
+    }
+  }, [mooseList, isLoading]);
 
   function addMoose(newMoose) {
     setMooseList((previousMooseList) => [...previousMooseList, newMoose]);
@@ -31,7 +45,11 @@ function App() {
     <main>
       <h1>Meese</h1>
       <AddMooseForm onAddMoose={addMoose} />
-      <MeeseList onRemoveMoose={removeTodo} mooseList={mooseList} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <MeeseList onRemoveMoose={removeTodo} mooseList={mooseList} />
+      )}
     </main>
   );
 }

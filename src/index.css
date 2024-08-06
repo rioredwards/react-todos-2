@@ -1,11 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Indie+Flower&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap?family=Lilita+One&display=swap");
+@font-face {
+  font-family: rustic;
+  src: url("/Aldivaro_Stamp_Demo.otf");
+}
+@font-face {
+  font-family: "Lilita One";
+  src: url("/LilitaOne-Regular.ttf");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: "Comfortaa", sans-serif; */
+  font-family: "Lilita One", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-optical-sizing: auto;
   line-height: 1.5;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #203650;
+  background-image: linear-gradient(
+    130deg,
+    rgba(103, 184, 232, 0.106) 0%,
+    rgba(24, 99, 160, 0.028) 10%,
+    rgba(30, 222, 212, 0.049) 50%,
+    rgba(30, 161, 222, 0.076) 60%,
+    rgba(30, 177, 222, 0.164) 100%
+  );
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,40 +43,113 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
-  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  --width: 100vw;
+  text-align: center;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+  width: var(--width);
+  margin: auto;
+  min-height: 100vh;
+  position: fixed;
+  left: calc(50vw - (var(--width) / 2));
+  top: 0;
+  padding-top: 5rem;
+}
+
+.backgroundImage,
+.backgroundImageFilter {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100vw;
   min-height: 100vh;
 }
 
+.backgroundImage {
+  z-index: 0;
+  background-image: url("./assets/forest.jpg");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.backgroundImageFilter {
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.583);
+  backdrop-filter: blur(2px);
+}
+
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 4.2em;
+  line-height: 0.5;
+  font-family: "rustic", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(211, 78, 11);
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgb(211, 84, 11);
+  background-image: linear-gradient(
+    180deg,
+    rgba(201, 201, 201, 0.041) 0%,
+    rgba(224, 224, 224, 0.223) 100%
+  );
+  border: 1px inset rgba(0, 140, 255, 0.305);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #ffffff3a;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+form {
+  display: grid;
+  grid-template-rows: auto auto; /* Two rows: label (auto height), input/button (auto height) */
+  grid-template-columns: 1fr 1fr; /* Single column spanning the full width */
+  gap: 10px; /* Spacing between grid items */
+}
+
+label {
+  grid-row-start: 1;
+  column-span: 2;
+  justify-self: center;
+}
+
+input {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  padding-left: 1rem;
+  border-radius: 8px;
+  background-color: rgb(231, 231, 231);
+  color: #242424;
+}
+
+button {
+  grid-row-start: 2;
+  grid-column-start: 2;
 }
 
 @media (prefers-color-scheme: light) {

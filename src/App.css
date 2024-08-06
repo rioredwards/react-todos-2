@@ -1,42 +1,48 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+ul {
+  padding-left: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+li {
+  --og-width: 784.8;
+  --og-height: 142.06;
+  --aspect-ratio: calc(var(--og-height) / var(--og-width));
+  --width: 22rem;
+  --height: calc(var(--width) * var(--aspect-ratio));
+  font-size: 1.3rem;
+  text-align: left;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 0.5rem 1.4rem;
+  margin-bottom: 0.5rem;
+  width: var(--width);
+  height: var(--height);
+  /* border-radius: 1rem; */
+  /* background-color: rgb(95, 52, 15); */
+  background-image: url("./assets/board.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-position-y: center;
+  /* border: 1px inset rgba(255, 255, 255, 0.129); */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+li > button {
+  font-size: 70%;
+  max-height: 2rem;
+  background-color: rgba(164, 56, 35, 0.83);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.039) 0%,
+    rgba(0, 0, 0, 0.185) 100%
+  );
+  border: none;
+  padding-bottom: 1.5rem;
 }

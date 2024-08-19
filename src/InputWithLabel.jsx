@@ -1,11 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export function InputWithLabel(props) {
-  // useRef can be used to store DOM elements in state
-  // Unlike variables from useState, ref's don't cause re-renders
   const inputRef = useRef();
-
-  console.log(inputRef.current);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -13,12 +9,12 @@ export function InputWithLabel(props) {
 
   return (
     <>
-      <label htmlFor="mooseType">{props.children}</label>
+      <label htmlFor="catType">{props.children}</label>
       <input
-        value={props.mooseTitle}
+        value={props.catTitle}
         onChange={props.handleTitleChange}
         name="type"
-        id="mooseType"
+        id="catType"
         ref={inputRef}
       />
     </>

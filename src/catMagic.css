@@ -1,4 +1,4 @@
-.mooseImgContainer {
+.catImgContainer {
   z-index: 2;
   position: fixed;
   top: 0;
@@ -14,7 +14,7 @@
   animation: rotate 200s linear infinite;
 }
 
-.mooseImg {
+.catImg {
   width: 180px;
   animation: rotate-backwards 200s linear infinite;
   opacity: 0;
@@ -25,7 +25,7 @@
   opacity: 1;
 }
 
-.mooseImg:nth-child(5) {
+.catImg:nth-child(5) {
   grid-column-start: 3;
 }
 

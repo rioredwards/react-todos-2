@@ -1,55 +1,51 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import MeeseList from "./MooseList.jsx";
-import AddMooseForm from "./AddMooseForm.jsx";
+import CatsList from "./CatList.jsx";
+import AddCatForm from "./AddCatForm.jsx";
 
 function App() {
-  const [mooseList, setMooseList] = useState([]);
+  const [catList, setCatList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        const existingMeese = JSON.parse(localStorage.getItem("savedMooseList")) ?? [];
+        const existingCats = JSON.parse(localStorage.getItem("savedCatList")) ?? [];
         const object = {
           data: {
-            mooseList: existingMeese,
+            catList: existingCats,
           },
         };
         resolve(object);
       }, 2000);
     }).then((result) => {
-      const retrievedMooseList = result.data.mooseList;
-      setMooseList(retrievedMooseList);
+      const retrievedCatList = result.data.catList;
+      setCatList(retrievedCatList);
       setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     if (!isLoading) {
-      const mooseListString = JSON.stringify(mooseList);
-      localStorage.setItem("savedMooseList", mooseListString);
+      const catListString = JSON.stringify(catList);
+      localStorage.setItem("savedCatList", catListString);
     }
-  }, [mooseList, isLoading]);
+  }, [catList, isLoading]);
 
-  function addMoose(newMoose) {
-    setMooseList((previousMooseList) => [...previousMooseList, newMoose]);
+  function addCat(newCat) {
+    setCatList((previousCatList) => [...previousCatList, newCat]);
   }
 
-  function removeTodo(id) {
-    const filteredMeese = mooseList.filter((moose) => moose.id !== id);
-    setMooseList(filteredMeese);
+  function removeCat(id) {
+    const filteredCats = catList.filter((cat) => cat.id !== id);
+    setCatList(filteredCats);
   }
 
   return (
     <main>
-      <h1>Meese</h1>
-      <AddMooseForm onAddMoose={addMoose} />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <MeeseList onRemoveMoose={removeTodo} mooseList={mooseList} />
-      )}
+      <h1>CATS</h1>
+      <AddCatForm onAddCat={addCat} />
+      {isLoading ? <p>Loading...</p> : <CatsList onRemoveCat={removeCat} catList={catList} />}
     </main>
   );
 }

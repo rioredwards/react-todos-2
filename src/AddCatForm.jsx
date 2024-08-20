@@ -11,12 +11,7 @@ export default function AddCatForm({ onAddCat }) {
 
   function handleAddCat(event) {
     event.preventDefault();
-    const newCat = {
-      title: catTitle,
-      id: Date.now(),
-    };
-
-    onAddCat(newCat);
+    onAddCat(catTitle);
     setCatTitle("");
   }
 

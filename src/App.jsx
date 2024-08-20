@@ -7,34 +7,83 @@ function App() {
   const [catList, setCatList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const existingCats = JSON.parse(localStorage.getItem("savedCatList")) ?? [];
-        const object = {
-          data: {
-            catList: existingCats,
+  async function addCat(newCatTitle) {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        records: [
+          {
+            fields: {
+              title: newCatTitle,
+            },
           },
-        };
-        resolve(object);
-      }, 2000);
-    }).then((result) => {
-      const retrievedCatList = result.data.catList;
-      setCatList(retrievedCatList);
+        ],
+      }),
+    };
+
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
+      import.meta.env.VITE_TABLE_NAME
+    }`;
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const newCat = {
+        title: data.records[0].fields.title,
+        id: data.records[0].id,
+      };
+
+      setCatList((prevCatList) => [newCat, ...prevCatList]);
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
+
+  async function fetchData() {
+    const options = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}` },
+    };
+
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
+      import.meta.env.VITE_TABLE_NAME
+    }`;
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const cats = data.records.map((cat) => {
+        return { id: cat.id, title: cat.fields.title };
+      });
+
+      setCatList(cats);
       setIsLoading(false);
-    });
-  }, []);
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
 
   useEffect(() => {
-    if (!isLoading) {
-      const catListString = JSON.stringify(catList);
-      localStorage.setItem("savedCatList", catListString);
-    }
-  }, [catList, isLoading]);
-
-  function addCat(newCat) {
-    setCatList((previousCatList) => [...previousCatList, newCat]);
-  }
+    fetchData();
+  }, []);
 
   function removeCat(id) {
     const filteredCats = catList.filter((cat) => cat.id !== id);

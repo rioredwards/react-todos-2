@@ -2,10 +2,46 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import CatsList from "./CatList.jsx";
 import AddCatForm from "./AddCatForm.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const BASE_URL = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
+  import.meta.env.VITE_TABLE_NAME
+}`;
 
 function App() {
   const [catList, setCatList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  async function removeCat(catId) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const url = `${BASE_URL}/${catId}`;
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(`${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.deleted) {
+        throw new Error("Cat not deleted for some reason 🤷‍♂️");
+      }
+
+      setCatList((previousCatList) => previousCatList.filter((cat) => cat.id !== data.id));
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
 
   async function addCat(newCatTitle) {
     const options = {
@@ -25,12 +61,8 @@ function App() {
       }),
     };
 
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
-      import.meta.env.VITE_TABLE_NAME
-    }`;
-
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(BASE_URL, options);
 
       if (!response.ok) {
         throw new Error(`${response.status}`);
@@ -56,12 +88,8 @@ function App() {
       headers: { Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}` },
     };
 
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
-      import.meta.env.VITE_TABLE_NAME
-    }`;
-
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(BASE_URL, options);
 
       if (!response.ok) {
         throw new Error(`${response.status}`);
@@ -85,17 +113,26 @@ function App() {
     fetchData();
   }, []);
 
-  function removeCat(id) {
-    const filteredCats = catList.filter((cat) => cat.id !== id);
-    setCatList(filteredCats);
-  }
-
   return (
-    <main>
-      <h1>CATS</h1>
-      <AddCatForm onAddCat={addCat} />
-      {isLoading ? <p>Loading...</p> : <CatsList onRemoveCat={removeCat} catList={catList} />}
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main>
+              <h1>CATS</h1>
+              <AddCatForm onAddCat={addCat} />
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <CatsList onRemoveCat={removeCat} catList={catList} />
+              )}
+            </main>
+          }
+        />
+        <Route path="/new" element={<h1>New Cat List</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

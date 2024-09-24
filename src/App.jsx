@@ -4,9 +4,9 @@ import CatsList from "./CatList.jsx";
 import AddCatForm from "./AddCatForm.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const BASE_URL = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${
-  import.meta.env.VITE_TABLE_NAME
-}`;
+const BASE_URL = `https://api.airtable.com/v0/${
+  import.meta.env.VITE_AIRTABLE_BASE_ID
+}/${import.meta.env.VITE_TABLE_NAME}`;
 
 function App() {
   const [catList, setCatList] = useState([]);
@@ -36,7 +36,9 @@ function App() {
         throw new Error("Cat not deleted for some reason 🤷‍♂️");
       }
 
-      setCatList((previousCatList) => previousCatList.filter((cat) => cat.id !== data.id));
+      setCatList((previousCatList) =>
+        previousCatList.filter((cat) => cat.id !== data.id)
+      );
     } catch (error) {
       console.log(error.message);
       return null;
@@ -85,7 +87,9 @@ function App() {
   async function fetchData() {
     const options = {
       method: "GET",
-      headers: { Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}` },
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+      },
     };
 
     try {

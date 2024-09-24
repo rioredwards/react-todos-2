@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import CatsList from "./CatList.jsx";
-import AddCatForm from "./AddCatForm.jsx";
+import CatsList from "./components/CatList.jsx";
+import AddCatForm from "./components/AddCatForm.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const BASE_URL = `https://api.airtable.com/v0/${
